@@ -1,0 +1,6 @@
+image
+matplotlib
+numpy
+opencv-python
+scipy
+selenium
