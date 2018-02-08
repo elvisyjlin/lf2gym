@@ -6,14 +6,14 @@
 
 """lf2gym.py: LF2-Gym, a maker of the OpenAI-Gym-like environment for Little Fighter 2."""
 
-# # Make it easy to import packages under lib/gym/.
+# # Make it easy to import packages under lib/.
 # import sys
-# sys.path.append('lib/gym')
+# sys.path.append('lib')
 
 # Make these enums available from lf2gym.
 # E.g. lf2gym.Character.Firen
 # E.g. lf2gym.C.Firen
-from lib.gym.config import WebDriver, Character, Difficulty, Background
+from lib.config import WebDriver, Character, Difficulty, Background
 W, C, D, B = WebDriver, Character, Difficulty, Background
 
 # Make function for LF2 environment.
@@ -22,9 +22,9 @@ def make(lf2gymPath='.', ip='127.0.0.1', port=8000, startServer=False, driverTyp
     background=Background.HK_Coliseum, action_options=['Basic', 'AJD', 'Full Combos'], 
     versusPlayer=False, duel=False, rewardList=['hp'], localDriver=True, canvasSize=(550, 794), debug=False):
 
-    from lib.gym.lf2environment import LF2Environment
-    from lib.gym.lf2wrapper import LF2Wrapper, LF2SkipNWrapper
-    from lib.gym.lf2exception import lf2raise
+    from lib.lf2environment import LF2Environment
+    from lib.lf2wrapper import LF2Wrapper, LF2SkipNWrapper
+    from lib.lf2exception import lf2raise
     from time import sleep
 
     if startServer:
@@ -52,7 +52,7 @@ def make(lf2gymPath='.', ip='127.0.0.1', port=8000, startServer=False, driverTyp
 # Server starting function.
 def start_server(ip='', port=8000, path='.', block=True):
 
-    import lib.gym.lf2server as lf2server
+    import lib.lf2server as lf2server
 
     server = lf2server.LF2Server(path=path, ip=ip, port=port)
     server.start()
