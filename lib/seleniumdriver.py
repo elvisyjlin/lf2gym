@@ -7,10 +7,27 @@
 from .lf2exception import lf2raise
 
 import platform
-from os.path import join
+from os import makedirs
+from os.path import dirname, exists, join
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
+SRC_URL_DICT = {
+    'webdriver/phantomjsdriver_2.1.1_win32/phantomjs.exe': 'https://www.dropbox.com/s/y1sc5ujzhdqb9f4/phantomjs.exe?dl=1', 
+    'webdriver/phantomjsdriver_2.1.1_mac64/phantomjs': 'https://www.dropbox.com/s/b6hmitsz1u4wc5w/phantomjs?dl=1', 
+    'webdriver/phantomjsdriver_2.1.1_linux32/phantomjs': 'https://www.dropbox.com/s/xxka7isoskg53tr/phantomjs?dl=1', 
+    'webdriver/phantomjsdriver_2.1.1_linux64/phantomjs': 'https://www.dropbox.com/s/dhuw71d9l5umk5m/phantomjs?dl=1', 
+    'webdriver/chromedriver_2.35_win32/chromedriver.exe': 'https://www.dropbox.com/s/k8dibiirz35zjf0/chromedriver.exe?dl=1', 
+    'webdriver/chromedriver_2.35_mac64/chromedriver': 'https://www.dropbox.com/s/jatcb8n8lqijat9/chromedriver?dl=1', 
+    'webdriver/chromedriver_2.35_linux64/chromedriver': 'https://www.dropbox.com/s/vgyik5zsngpkck4/chromedriver?dl=1', 
+    'webdriver/geckodriver_0.19.1_win32/geckodriver.exe': 'https://www.dropbox.com/s/s10tyhwc8z9nikg/geckodriver.exe?dl=1', 
+    'webdriver/geckodriver_0.19.1_win64/geckodriver.exe': 'https://www.dropbox.com/s/r9zt6l9c7cn1pc8/geckodriver.exe?dl=1', 
+    'webdriver/geckodriver_0.19.1_macos/geckodriver': 'https://www.dropbox.com/s/la2bfgdsdk2mrhj/geckodriver?dl=1', 
+    'webdriver/geckodriver_0.19.1_linux32/geckodriver': 'https://www.dropbox.com/s/8qjr5n1i9jhmkmb/geckodriver?dl=1', 
+    'webdriver/geckodriver_0.19.1_linux64/geckodriver': 'https://www.dropbox.com/s/b966sm5v98nmd5g/geckodriver?dl=1', 
+    'webdriver/geckodriver_0.19.1_arm7hf/geckodriver': 'https://www.dropbox.com/s/k8dibiirz35zjf0/chromedriver.exe?dl=1'
+}
 
 def get(driverType, localDriver, path='.'):
     driverType = str(driverType)
@@ -90,4 +107,18 @@ def get_source(driverType, path='.'):
             lf2raise('Failed to recognize your OS [%s / %s].' % (os, bits))
     else:
         lf2raise('Not supported driver type [%s].' % driverType)
+    if not exists(source):
+        print('Web driver "%s" not found.' % source)
+        global SRC_URL_DICT
+        for (src, url) in SRC_URL_DICT.items():
+            if src in source:
+                print('Downloading...')
+                makedirs(dirname(source))
+                import urllib.request
+                u = urllib.request.urlopen(url)
+                data = u.read()
+                u.close()
+                with open(source, "wb") as f:
+                    f.write(data)
+                print('Web driver "%s" has been downloaded.' % source)
     return source

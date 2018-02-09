@@ -269,6 +269,17 @@ Also, the items in the game are invisibled and broken whenever they are generate
 The frame rate is also raised to 180fps.
 
 
+# Web Drivers
+
+The web drivers will be downloaded automatically when used.
+
+The following web drivers are utilized to run the game.
+
+1. PhantomJS - http://phantomjs.org/download.html
+2. ChromeDriver (Google Chrome) - https://sites.google.com/a/chromium.org/chromedriver/
+3. GeckoDriver (Firefox) - https://github.com/mozilla/geckodriver/releases
+
+
 # Reference
 
 This project is based on the open source Little Fighter 2 game - [Project F](https://github.com/Project-F).  
