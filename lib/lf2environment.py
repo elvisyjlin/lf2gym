@@ -38,16 +38,16 @@ RESET_PATIENCE = 10
 LOG_NOT_FOUND_PATIENCE = 40
 
 class LF2Environment():
-    def __init__(self, lf2gymPath, ip, port, driverType, characters, difficulty, background, versusPlayer, duel, rewardList, localDriver, canvasSize, debug):
+    def __init__(self, path, ip, port, driverType, characters, difficulty, background, versusPlayer, duel, rewardList, localDriver, canvasSize, debug):
         print('Creating LF2 environment...')
 
         global FOLDERS
-        FOLDERS = [join(lf2gymPath, folder) for folder in FOLDERS]
+        FOLDERS = [join(path, folder) for folder in FOLDERS]
         for folder in FOLDERS:
             if not exists(folder):
                 mkdir(folder)
 
-        self.path = lf2gymPath
+        self.path = path
         self.url = 'http://' + ip + ':' + str(port)
         self.driverType = driverType
         self.characters = characters

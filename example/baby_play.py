@@ -12,14 +12,14 @@ parser.add_argument("--interval", default=0.2, help="your enemy")
 args = parser.parse_args()
 
 
-import sys
-lf2gymPath = '..'
+import os, sys
+lf2gymPath = os.path.abspath('..')
 sys.path.append(lf2gymPath)
 
 import lf2gym
 from time import sleep
 env = lf2gym.make(startServer=True, driverType=lf2gym.WebDriver.Chrome, 
-    characters=[lf2gym.Character[args.opponent], lf2gym.Character[args.player]], versusPlayer=True, lf2gymPath=lf2gymPath)
+    characters=[lf2gym.Character[args.opponent], lf2gym.Character[args.player]], versusPlayer=True)
 env.reset()
 
 done = False

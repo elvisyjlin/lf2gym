@@ -13,11 +13,16 @@
 # Make these enums available from lf2gym.
 # E.g. lf2gym.Character.Firen
 # E.g. lf2gym.C.Firen
+import os, sys
+lf2gymPath = os.path.dirname(os.path.abspath(__file__))
+if lf2gymPath not in sys.path:
+    sys.path.append(lf2gymPath)
+
 from lib.config import WebDriver, Character, Difficulty, Background
 W, C, D, B = WebDriver, Character, Difficulty, Background
 
 # Make function for LF2 environment.
-def make(lf2gymPath='.', ip='127.0.0.1', port=8000, startServer=False, driverType=WebDriver.PhantomJS, 
+def make(ip='127.0.0.1', port=8000, startServer=False, driverType=WebDriver.PhantomJS, 
     wrap='skip4', characters=[Character.Davis, Character.Dennis], difficulty=Difficulty.Dumbass, 
     background=Background.HK_Coliseum, action_options=['Basic', 'AJD', 'Full Combos'], 
     versusPlayer=False, duel=False, rewardList=['hp'], localDriver=True, canvasSize=(550, 794), debug=False):
@@ -31,7 +36,7 @@ def make(lf2gymPath='.', ip='127.0.0.1', port=8000, startServer=False, driverTyp
         start_server(ip=ip, port=port, path=lf2gymPath, block=False)
         sleep(2)
     
-    env = LF2Environment(lf2gymPath=lf2gymPath, ip=ip, port=port, driverType=driverType, 
+    env = LF2Environment(path=lf2gymPath, ip=ip, port=port, driverType=driverType, 
         characters=characters, difficulty=difficulty, background=background, 
         versusPlayer=versusPlayer, duel=duel, rewardList=rewardList, localDriver=localDriver, 
         canvasSize=canvasSize, debug=debug)
