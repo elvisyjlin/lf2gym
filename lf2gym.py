@@ -22,8 +22,8 @@ from lib.config import WebDriver, Character, Difficulty, Background
 W, C, D, B = WebDriver, Character, Difficulty, Background
 
 # Make function for LF2 environment.
-def make(ip='127.0.0.1', port=8000, startServer=False, driverType=WebDriver.PhantomJS, 
-    wrap='skip4', characters=[Character.Davis, Character.Dennis], difficulty=Difficulty.Dumbass, 
+def make(ip='127.0.0.1', port=8000, startServer=True, wrap='skip4', driverType=WebDriver.PhantomJS, 
+    characters=[Character.Davis, Character.Dennis], difficulty=Difficulty.Dumbass, 
     background=Background.HK_Coliseum, action_options=['Basic', 'AJD', 'Full Combos'], 
     versusPlayer=False, duel=False, rewardList=['hp'], localDriver=True, canvasSize=(550, 794), debug=False):
 

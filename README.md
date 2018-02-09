@@ -193,12 +193,11 @@ env.perform_actions(sequence)
 
 Parameter | Description | Available Values | Default Value
 --- | --- | --- | ---
-lf2gymPath | Set this if importing `lf2gym` in different folder. | A string of path. | `'.'`
 ip | The LF2Server IP. | A string of IP. | `'127.0.0.1'`
 port | The LF2Server port. | An Integer of port. | `8000`
-startServer | Start a new LF2Server. | A Boolean. | `False`
-driverType | Web driver type. | `WebDriver.PhantomJS`, `WebDriver.Chrome` or `WebDriver.Firefox` | `WebDriver.PhantomJS`
+startServer | Start a new LF2Server. | A Boolean. | `True`
 wrap | Wrap the env with memory 4 or with a skip-4 wrapper. | `'4'` or `'skip4'`, `'skip5'`, ... | `'skip4'`
+driverType | Web driver type. | `WebDriver.PhantomJS`, `WebDriver.Chrome` or `WebDriver.Firefox` | `WebDriver.PhantomJS`
 characters | Character selection [Me, AI]. | Character. | `[Character.Davis, Character.Dennis]`
 difficulty | Difficulty of enemies. | `Difficulty.Dumbass'`, `Difficulty.Challangar` or `Difficulty.Crusher` | `Difficulty.Dumbass`
 background | Background selection. | Background. | `Background.HK_Coliseum`
