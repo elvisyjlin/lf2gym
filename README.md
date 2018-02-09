@@ -1,6 +1,6 @@
 # LF2 Gym
 
-An OpenAI-gym-like environment for Little Fighter 2.
+An OpenAI-gym-like environment for Little Fighter 2
 
 The major contributors of this repository include [Yu-Jing Lin](https://github.com/elvisyjlin), 
 [Po-Wei Wu](https://github.com/willylulu), [Yu-Jhe Li](https://github.com/YuJheLi) 
@@ -8,12 +8,13 @@ and [Hsin-Yu Chang](https://github.com/r06922062).
 
 [Little Fighter 2](http://lf2.net/) is a freeware PC 2.5D fighting game. 
 We wrapped its open source version, [F.LF](http://www.projectf.hk/F.LF/), 
-into a trainable *env* for reinforcement learning.
+into a trainable environment for reinforcement learning.
+
 
 #### Demo
 
-Applying reinforcement learning methods with `lf2gym`, 
-the agent is able to play **Woody (green)** against Louis (gray) as the video shows.
+By applying reinforcement learning methods on the LF2 Gym, 
+the agent is able to play **Woody (the one in green)** against Louis as shown below.
 
 ![Demo](https://github.com/elvisyjlin/lf2gym/blob/master/demo/woody_vs_louis.gif)
 
@@ -27,7 +28,8 @@ the agent is able to play **Woody (green)** against Louis (gray) as the video sh
    cd lf2gym
    ```
 
-2. Download the open source LF2 from [Project F](https://github.com/Project-F) and make it trainable.
+2. Download the open source LF2 from [Project F](https://github.com/Project-F) 
+and make it trainable (see [here](https://github.com/elvisyjlin/lf2gym#modifications-to-the-original-game)).
 
    ```bash
    sh setup.sh
@@ -41,7 +43,7 @@ the agent is able to play **Woody (green)** against Louis (gray) as the video sh
    pip3 install -r requirements.txt
    ```
 
-4. Tkinter (Optional)
+4. Install Tkinter (optional, for screen rendering)
 
    Install Tkinter if you want to render the game on screen. 
    On the other hand, you can use Google Chrome to run the game without calling `render()`.
@@ -60,6 +62,7 @@ the agent is able to play **Woody (green)** against Louis (gray) as the video sh
 
 ## To start
 
+
 ### Env
 
 Make an LF2 environment.  
@@ -70,7 +73,8 @@ import lf2gym
 env = lf2gym.make()
 ```
 
-All parameters for `make()` are described [here](https://github.com/elvisyjlin/lf2gym#parameters)
+All parameters for `make()` are described [here](https://github.com/elvisyjlin/lf2gym#parameters).
+
 
 ### Server
 
@@ -84,6 +88,7 @@ lf2gym.start_server(port=8000)
 Open your browser, and connect to `http://127.0.0.1:8000/game/game.html` to play LF2!
 
 Keyboard control setting is described [here](https://github.com/elvisyjlin/lf2gym#keyboard-control).
+
 
 ### Examples
 
@@ -215,32 +220,23 @@ Note that Google Chrome browser or Firefox browser should be installed first.
 
 ## Action Space
 
+
 #### Base Action Space
 
-Value | Action | Skip-N Action
---- | --- | ---
-0 | idle | idle
-1 | ^ | ^
-2 | v | v
-3 | < | <
-4 | > | >
-5 | A | ^>
-6 | J | v>
-7 | D | ^<
-8 | < < | v<
-9 | > > | < <
-10 | ^> | > >
-11 | v> | A
-12 | ^< | J
-13 | v< | D
-14 |  | D < A
-15 |  | D > A
-16 |  | D < J
-17 |  | D > J
-18 |  | D ^ A
-19 |  | D v A
-20 |  | D ^ J
-21 |  | D v J
+Value | Action | Skip-N Action | Value | Action | Skip-N Action
+--- | --- | --- | --- | --- | ---
+0 | idle | idle | 11 | v> | A
+1 | ^ | ^ | 12 | ^< | J
+2 | v | v | 13 | v< | D
+3 | < | < | 14 |  | D < A
+4 | > | > | 15 |  | D > A
+5 | A | ^> | 16 |  | D < J
+6 | J | v> | 17 |  | D > J
+7 | D | ^< | 18 |  | D ^ A
+8 | < < | v< | 19 |  | D v A
+9 | > > | < < | 20 |  | D ^ J
+10 | ^> | > > | 21 |  | D v J
+
 
 #### Group of Actions
 
