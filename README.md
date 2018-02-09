@@ -4,7 +4,7 @@ An OpenAI-gym-like environment for Little Fighter 2
 
 The major contributors of this repository include [Yu-Jing Lin](https://github.com/elvisyjlin), 
 [Po-Wei Wu](https://github.com/willylulu), [Yu-Jhe Li](https://github.com/YuJheLi) 
-and [Hsin-Yu Chang](https://github.com/r06922062).
+and [Hsin-Yu Chang](https://github.com/acht7111020).
 
 [Little Fighter 2](http://lf2.net/) is a freeware PC 2.5D fighting game. 
 We wrapped its open source version, [F.LF](http://www.projectf.hk/F.LF/), 
@@ -58,6 +58,22 @@ and make it trainable (see [here](https://github.com/elvisyjlin/lf2gym#modificat
    ```bash
    sudo yum install python3-tkinter
    ```
+
+
+## Requirements
+
+1. PIL (Python Imaging Library)
+2. matplotlib
+3. numpy
+4. opencv-python
+5. scipy
+6. selenium
+
+Get all required packages.
+
+```bash
+pip3 install -r requirements.txt
+```
 
 
 ## To start
@@ -269,7 +285,7 @@ Also, the items in the game are invisibled and broken whenever they are generate
 The frame rate is also raised to 180fps.
 
 
-# Web Drivers
+## Web Drivers
 
 The web drivers will be downloaded automatically when used.
 
