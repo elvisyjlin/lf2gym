@@ -35,7 +35,7 @@ and make it trainable (see [here](https://github.com/elvisyjlin/lf2gym#modificat
    sh setup.sh
    ```
 
-3. Install Python 3 and get all required packages.
+3. Install Python 3 and get all dependencies.
 
    This project is developed under Python 3.6.2 and has been tested in Python 3.4.0.
 
@@ -58,22 +58,6 @@ and make it trainable (see [here](https://github.com/elvisyjlin/lf2gym#modificat
    ```bash
    sudo yum install python3-tkinter
    ```
-
-
-## Requirements
-
-1. PIL (Python Imaging Library)
-2. matplotlib
-3. numpy
-4. opencv-python
-5. scipy
-6. selenium
-
-Get all required packages.
-
-```bash
-pip3 install -r requirements.txt
-```
 
 
 ## To start
@@ -108,13 +92,21 @@ Keyboard control setting is described [here](https://github.com/elvisyjlin/lf2gy
 
 ### Examples
 
-Some examples demonstrate how to use the LF2 Gym.
+Some examples demonstrate how to use the LF2 Gym. 
 
 ```bash
 cd example
 ```
 
-1. To play with a baby agent, which only takes random actions.
+1. To try a simple example.
+
+   ```bash
+   python test.py
+   ```
+
+   `test.py` simulates an agent with predefined actions to play Davis against dumb Dennis, and saves the recording to `test.avi`. 
+
+2. To play with a baby agent, which only takes random actions.
 
    ```bash
    python baby_play.py
@@ -252,6 +244,15 @@ Value | Action | Skip-N Action | Value | Action | Skip-N Action
 9 | > > | < < | 20 |  | D ^ J
 10 | ^> | > > | 21 |  | D v J
 
+With the default `action_options`, which is `['Basic', 'AJD', 'Full Combos']`, the skip-N action space is 
+
+Value | SN Act | Value | SN Act | Value | SN Act | Value | SN Act
+--- | --- | --- | --- | --- | --- | --- | ---
+0 | idle | 4 | > | 8 | D < A | 12 | D ^ A
+1 | ^ | 5 | A | 9 | D > A | 13 | D v A
+2 | v | 6 | J | 10 | D < J | 14 | D ^ J
+3 | < | 7 | D | 11 | D > J | 15 | D v J
+
 
 #### Group of Actions
 
@@ -280,9 +281,8 @@ Defense | Z | M (,)
 
 ## Modifications to the original game
 
-In order to train the agent better, we remove the background of 'HK Coliseum' and the image of 'pause'. 
-Also, the items in the game are invisibled and broken whenever they are generated. 
-The frame rate is also raised to 180fps.
+In order to train the agent better, we did some modifications to [F.LF](http://www.projectf.hk/F.LF/). 
+See [here](https://github.com/elvisyjlin/lf2gym/tree/master/modify#modified-files). 
 
 
 ## Web Drivers
@@ -291,12 +291,15 @@ The web drivers will be downloaded automatically when used.
 
 The following web drivers are utilized to run the game.
 
-1. PhantomJS - http://phantomjs.org/download.html
-2. ChromeDriver (Google Chrome) - https://sites.google.com/a/chromium.org/chromedriver/
-3. GeckoDriver (Firefox) - https://github.com/mozilla/geckodriver/releases
+1. PhantomJS  
+   http://phantomjs.org/download.html
+2. ChromeDriver ([Google Chrome](https://www.google.com/chrome/))  
+   https://sites.google.com/a/chromium.org/chromedriver/
+3. GeckoDriver ([Firefox](https://www.mozilla.org/en-US/firefox/))  
+   https://github.com/mozilla/geckodriver/releases
 
 
 # Reference
 
-This project is based on the open source Little Fighter 2 game - [Project F](https://github.com/Project-F).  
-The methods of `lf2gym` and `lf2environment` are refered to by [OpenAI Gym](https://gym.openai.com/docs/).
+This project is based on the open source Little Fighter 2 game of [Project F](https://github.com/Project-F).  
+The [OpenAI Gym](https://gym.openai.com/docs/) is taken for reference to design the architecture of `lf2gym`.

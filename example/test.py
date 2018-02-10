@@ -4,48 +4,56 @@
 # Copyright (C) 2018 Elvis Yu-Jing Lin <elvisyjlin@gmail.com>
 # Licensed under the MIT License - https://opensource.org/licenses/MIT
 
-import lf2gym
-from lf2gym import WebDriver, Character
-from time import sleep, time
-from selenium.webdriver.common.action_chains import ActionChains
+# Game setting
+AGENT = 'Davis'
+OPPOENENT = 'Dennis'
+ACTIONS = [0, 0, 4, 4, 4, 2, 2, 2, 3, 3, 3, 1, 1, 1, 0, 0, 0, 9, 9, 9, 9, 0, 0, 0, 4, 0, 4, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0]
 
-s = time()
+# Helper function
+from time import time
 def tick(msg):
     global s
     t = time()
     print('%s: %f seconds.' % (msg, t - s))
     s = t
 
-# env = lf2gym.make(startServer=True, wrap='skip4', driverType='Chrome', captureWindowSize=(900, 1200), characters=['Woody', 'Bandit', 'Bandit', 'Bandit', 'Bandit', 'Bandit', 'Bandit', 'Bandit'])
-# env = lf2gym.make(startServer=True, wrap='skip4', driverType='Chrome', captureWindowSize=(900, 1200), characters=['Woody', 'Firen'])
+# Add import path and import the lf2gym
+import os, sys
+sys.path.append(os.path.abspath('..'))
 
-# env = lf2gym.make(startServer=True, wrap='skip4', driverType='PhantomJS', characters=['Firen', 'Freeze'], versusPlayer=False)
-env = lf2gym.make(startServer=True, wrap='skip4', driverType=WebDriver.Chrome, characters=[Character.Firen, Character.Freeze], 
-                  versusPlayer=False, duel=False, debug=True)
-# driver = env.driver
+# Import lf2gym
+import lf2gym
+# Make an env
+env = lf2gym.make(startServer=True, wrap='skip4', driverType=lf2gym.WebDriver.PhantomJS, 
+    characters=[lf2gym.Character[AGENT], lf2gym.Character[OPPOENENT]], 
+    difficulty=lf2gym.Difficulty.Dumbass, debug=True)
 
-opt = env.get_reset_options();
-print(opt)
-opt['hp_full'] = 100
-opt['mp_start'] = 50
-print(opt)
-env.reset(opt)
-sleep(100)
+# Set the reset options
+options = env.get_reset_options();
+print('Original reset options: %s' % options)
+options['hp_full'] = 100
+options['mp_start'] = 250
+print('Custom reset options: %s' % options)
+
+# Reset the env
+env.reset(options)
+
+# Start to record the screen
+env.start_recording()
+
+# Skip 200 steps (i.e. 800 frames in skip-4 wrapping)
 env.idle(200)
-# env.start_screenshotting()
-# print(env.env.env.get_saved_log())
-# env.close()
 
-# actions = [10, 0, 0, 0, 0, 14, 0, 0, 12, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-# actions = [0, 0, 4, 2, 3, 1, 0, 0, 10, 0, 0, 14, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-actions = [0, 0, 4, 2, 3, 1, 0, 0, 5, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0, 7, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0]
-print(env.env.action_space.action_map)
-print(env.env.action_space_2.action_map)
-print(env.action_space.action_map)
-
-for act in actions:
+# Loop starts
+s = time()
+for act in ACTIONS:
+    # Take an action
     env.step(act)
-    # env.step(act, act)
-    # env.render()
-    print(env.action_info())
-    sleep(1)
+    # Render the screen
+    env.render()
+    # Print out the current and the previous actions
+    tick(env.action_info())
+
+# Stop recording and save to a file
+env.stop_recording()
+env.save_recording('test.avi')
