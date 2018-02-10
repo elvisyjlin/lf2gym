@@ -33,13 +33,21 @@ class Recorder():
         # print(command)
         # system(command)
 
-        assert file.rsplit('.', 1)[1] == 'mp4', 'Please save video as ".mp4" format.'
+        ext = file.rsplit('.', 1)[1]
+        fourcc = ''
+        if ext == 'mp4':
+            fourcc = 'MP4V'
+        elif ext == 'avi':
+            fourcc = 'MJPG'
+            # fourcc = 'XVID'
+        else:
+            assert False, 'Please save the video as ".mp4" or ".avi" format.'
 
         import cv2 
-        size = self.buffer[0].shape[:2]
-        writer = cv2.VideoWriter(file, cv2.VideoWriter_fourcc(*'MP4V'), 25, size, True)
+        size = self.buffer[0].shape[1::-1] # shape (300, 400, 4) -> size (400, 300)
+        writer = cv2.VideoWriter(file, cv2.VideoWriter_fourcc(*fourcc), 25, size, True)
         for img in self.buffer:
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            img = cv2.cvtColor(img[:, :, :3], cv2.COLOR_BGR2RGB)
             writer.write(img) 
         # cv2.destroyAllWindows()
         writer.release()

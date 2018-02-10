@@ -4,6 +4,7 @@ F.LF/
 debug/
 log/
 screenshot/
+webdriver/
 *.log
 *.pyc
 .ipynb_checkpoints

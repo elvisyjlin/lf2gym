@@ -35,11 +35,11 @@ def get(driverType, localDriver, path='.'):
         # phantomjs_options.add_argument("--disable-web-security")
         if localDriver:
             source = get_source(driverType, path)
-            # driver = webdriver.PhantomJS(executable_path=source, service_log_path='log/ghostdriver.log', service_args=["--remote-debugger-port=9000", "--web-security=false"])
-            driver = webdriver.PhantomJS(executable_path=source, service_args=["--remote-debugger-port=9000", "--web-security=false"])
+            driver = webdriver.PhantomJS(executable_path=source, service_log_path=join(path, 'phantomjs.log'), service_args=["--remote-debugger-port=9000", "--web-security=false"])
+            # driver = webdriver.PhantomJS(executable_path=source, service_args=["--remote-debugger-port=9000", "--web-security=false"])
         else:
-            # driver = webdriver.PhantomJS(service_log_path='log/ghostdriver.log', service_args=["--remote-debugger-port=9000", "--web-security=false"])
-            driver = webdriver.PhantomJS(service_args=["--remote-debugger-port=9000", "--web-security=false"])
+            driver = webdriver.PhantomJS(service_log_path=join(path, 'phantomjs.log'), service_args=["--remote-debugger-port=9000", "--web-security=false"])
+            # driver = webdriver.PhantomJS(service_args=["--remote-debugger-port=9000", "--web-security=false"])
     elif driverType == 'Chrome':
         desired = DesiredCapabilities.CHROME
         desired['loggingPrefs'] = {'browser': 'ALL'}
@@ -51,9 +51,9 @@ def get(driverType, localDriver, path='.'):
         # chrome_options.add_argument("--headless") # will not show the Chrome browser window
         if localDriver:
             source = get_source(driverType, path)
-            driver = webdriver.Chrome(executable_path=source, desired_capabilities=desired, chrome_options=chrome_options)
+            driver = webdriver.Chrome(executable_path=source, service_log_path=join(path, 'chromedriver.log'), desired_capabilities=desired, chrome_options=chrome_options)
         else:
-            driver = webdriver.Chrome(desired_capabilities=desired, chrome_options=chrome_options)
+            driver = webdriver.Chrome(service_log_path=join(path, 'chromedriver.log'), desired_capabilities=desired, chrome_options=chrome_options)
     elif driverType == 'Firefox':
         # desired = DesiredCapabilities.FIREFOX
         # desired['loggingPrefs'] = {'browser': 'ALL'}
@@ -62,9 +62,9 @@ def get(driverType, localDriver, path='.'):
         firefox_options.add_argument("--disable-infobars")
         if localDriver:
             source = get_source(driverType, path)
-            driver = webdriver.Firefox(executable_path=source, firefox_options=firefox_options)
+            driver = webdriver.Firefox(executable_path=source, service_log_path=join(path, 'geckodriver.log'), firefox_options=firefox_options)
         else:
-            driver = webdriver.Firefox(firefox_options=firefox_options)
+            driver = webdriver.Firefox(service_log_path=join(path, 'geckodriver.log'), firefox_options=firefox_options)
     return driver
 
 def get_source(driverType, path='.'):
@@ -112,7 +112,7 @@ def get_source(driverType, path='.'):
         global SRC_URL_DICT
         for (src, url) in SRC_URL_DICT.items():
             if src in source:
-                print('Downloading...')
+                print('Start downloading the web driver...')
                 makedirs(dirname(source))
                 import urllib.request
                 u = urllib.request.urlopen(url)
@@ -120,5 +120,5 @@ def get_source(driverType, path='.'):
                 u.close()
                 with open(source, "wb") as f:
                     f.write(data)
-                print('Web driver "%s" has been downloaded.' % source)
+                print('Web driver "%s" has been downloaded successfully.' % source)
     return source
