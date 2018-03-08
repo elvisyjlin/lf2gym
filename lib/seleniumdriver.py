@@ -4,8 +4,6 @@
 # Copyright (C) 2018 Elvis Yu-Jing Lin <elvisyjlin@gmail.com>
 # Licensed under the MIT License - https://opensource.org/licenses/MIT
 
-from .lf2exception import lf2raise
-
 import platform
 from os import makedirs
 from os.path import dirname, exists, join
@@ -29,7 +27,7 @@ SRC_URL_DICT = {
     'webdriver/geckodriver_0.19.1_arm7hf/geckodriver': 'https://www.dropbox.com/s/k8dibiirz35zjf0/chromedriver.exe?dl=1'
 }
 
-def get(driverType, localDriver, path='.'):
+def get(driverType, localDriver=True, path='.'):
     driverType = str(driverType)
     if driverType == 'PhantomJS':
         # phantomjs_options.add_argument("--disable-web-security")
@@ -82,7 +80,7 @@ def get_source(driverType, path='.'):
         elif os == 'Linux' and bits == '64bit':
             source = join(path, 'webdriver/phantomjsdriver_2.1.1_linux64/phantomjs')
         else:
-            lf2raise('Failed to recognize your OS [%s / %s].' % (os, bits))
+            raise Exception('Failed to recognize your OS [%s / %s].' % (os, bits))
     elif driverType == 'Chrome':
         if os == 'Windows':
             source = join(path, 'webdriver/chromedriver_2.35_win32/chromedriver.exe')
@@ -91,7 +89,7 @@ def get_source(driverType, path='.'):
         elif os == 'Linux':
             source = join(path, 'webdriver/chromedriver_2.35_linux64/chromedriver')
         else:
-            lf2raise('Failed to recognize your OS [%s / %s].' % (os, bits))
+            raise Exception('Failed to recognize your OS [%s / %s].' % (os, bits))
     elif driverType == 'Firefox':
         if os == 'Windows' and bits == '32bit':
             source = join(path, 'webdriver/geckodriver_0.19.1_win32/geckodriver.exe')
@@ -104,9 +102,9 @@ def get_source(driverType, path='.'):
         elif os == 'Linux' and bits == '64bit':
             source = join(path, 'webdriver/geckodriver_0.19.1_linux64/geckodriver')
         else:
-            lf2raise('Failed to recognize your OS [%s / %s].' % (os, bits))
+            raise Exception('Failed to recognize your OS [%s / %s].' % (os, bits))
     else:
-        lf2raise('Not supported driver type [%s].' % driverType)
+        raise Exception('Not supported driver type [%s].' % driverType)
     if not exists(source):
         print('Web driver "%s" not found.' % source)
         global SRC_URL_DICT

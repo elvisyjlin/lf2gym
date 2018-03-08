@@ -3,7 +3,7 @@
 function copy {
     md5_1=($(md5sum $1))
     md5_2=($(md5sum $2))
-    if [ $a != $b ]; then
+    if [ $md5_1 != $md5_2 ]; then
         cp -v $1 $2
     else
         echo "'$2' is up-to-date."

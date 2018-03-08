@@ -512,8 +512,7 @@ class LF2Environment():
             if not self.debugMode:
                 self.axs[index].axis('off')
             self.ims[index] = self.axs[index].imshow(data)
-        else:
-            self.ims[index].set_data(data)
+        self.ims[index].set_data(data)
         if label is not None:
             self.axs[index].set_title(label)
         self.figures[index].canvas.draw()
@@ -555,8 +554,8 @@ class LF2Environment():
         if self.recording: self.recording = False
         else: print('Already stopped recording that screen.')
 
-    def save_recording(self, name, delete_after_saved=True):
-        self.recorder.save(name)
+    def save_recording(self, filename, delete_after_saved=True):
+        self.recorder.save(filename)
         if delete_after_saved: self.recorder.clear()
 
     def close(self):

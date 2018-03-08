@@ -6,22 +6,19 @@
 
 """lf2gym.py: LF2-Gym, a maker of the OpenAI-Gym-like environment for Little Fighter 2."""
 
-# # Make it easy to import packages under lib/.
-# import sys
-# sys.path.append('lib')
-
-# Make these enums available from lf2gym.
-# E.g. lf2gym.Character.Firen
-# E.g. lf2gym.C.Firen
+# Auto detect the lf2gym path and add it to sys.path.
 import os, sys
 lf2gymPath = os.path.dirname(os.path.abspath(__file__))
 if lf2gymPath not in sys.path:
     sys.path.append(lf2gymPath)
 
+# Make these enums available from lf2gym.
+# E.g. lf2gym.Character.Firen
+# E.g. lf2gym.C.Firen
 from lib.config import WebDriver, Character, Difficulty, Background
 W, C, D, B = WebDriver, Character, Difficulty, Background
 
-# Make function for LF2 environment.
+# The make function for LF2 environment.
 def make(ip='127.0.0.1', port=8000, startServer=True, wrap='skip4', driverType=WebDriver.PhantomJS, 
     characters=[Character.Davis, Character.Dennis], difficulty=Difficulty.Dumbass, 
     background=Background.HK_Coliseum, action_options=['Basic', 'AJD', 'Full Combos'], 
@@ -54,7 +51,7 @@ def make(ip='127.0.0.1', port=8000, startServer=True, wrap='skip4', driverType=W
 
     return env
 
-# Server starting function.
+# Start an LF2 Server.
 def start_server(ip='', port=8000, path='.', block=True):
 
     import lib.lf2server as lf2server

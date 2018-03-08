@@ -51,7 +51,7 @@ for act in ACTIONS:
     env.step(act)
     # Render the screen
     env.render()
-    # Print out the current and the previous actions
+    # Print out the current and the previous actions as well as the time duration
     tick(env.action_info())
 
 # Stop recording and save to a file

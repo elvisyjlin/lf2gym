@@ -196,6 +196,28 @@ Perform specific key actions. `sequence` can be an action or several actions (se
 env.perform_actions(sequence)
 ```
 
+### Screen Recording
+
+1. Start recording  
+   The frames will be store in the buffer whenever `env.step()`.
+
+   ```python
+   env.start_recording()
+   ```
+
+2. Stop recording  
+   Stop storing frames to the buffer.
+
+   ```python
+   env.stop_recording()
+   ```
+
+3. Save the recorded frames to a video file.  
+   It supports `.avi` and `.mp4` formats.
+
+   ```python
+   env.save_recording(filename, delete_after_saved=True)
+   ```
 
 ## Parameters
 
@@ -279,9 +301,9 @@ Jump | Q | U (I)
 Defense | Z | M (,)
 
 
-## Modifications to the original game
+## Modifications to F.LF
 
-In order to train the agent better, we did some modifications to [F.LF](http://www.projectf.hk/F.LF/). 
+In order to train the agent better, we did some modifications to the original game. 
 See [here](https://github.com/elvisyjlin/lf2gym/tree/master/modify#modified-files). 
 
 
