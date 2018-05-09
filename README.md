@@ -10,6 +10,8 @@ and [Hsin-Yu Chang](https://github.com/acht7111020).
 We wrapped its open source version, [F.LF](http://www.projectf.hk/F.LF/), 
 into a trainable environment for reinforcement learning.
 
+This environment is used and described in the paper "Deep Reinforcement Learning for Playing 2.5D Fighting Games" (https://arxiv.org/abs/1805.02070).
+
 
 #### Demo
 
@@ -325,3 +327,17 @@ The following web drivers are utilized to run the game.
 
 This project is based on the open source Little Fighter 2 game of [Project F](https://github.com/Project-F).  
 The [OpenAI Gym](https://gym.openai.com/docs/) is taken for reference to design the architecture of `lf2gym`.
+
+
+---
+
+If you find our code useful for your research, please cite
+
+```text
+@inproceedings{li2018deep,
+  title={Deep Reinforcement Learning for Playing 2.5D Fighting Games},
+  author={Li, Yu-Jhe and Chang, Hsin-Yu and Lin, Yu-Jing and Wu, Po-Wei and Wang, Yu-Chiang},
+  booktitle={IEEE International Conference on Image Processing ({ICIP})},
+  year={2018}
+}
+```
