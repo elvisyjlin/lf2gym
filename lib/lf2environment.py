@@ -473,7 +473,7 @@ class LF2Environment():
         self.render_save('%s_orig.png' % name, 'orig', (400, 300), 'debug')
         self.render_save('%s_crop.png' % name, 'crop', (380, 160), 'debug')
         self.render_save('%s_obsv.png' % name, 'obsv', (380, 160), 'debug')
-        with open('debug/%s.log' % name, 'w') as f:
+        with open(join(self.path, 'debug', '%s.log' % name), 'w') as f:
             f.write(json.dumps(self.get_saved_log()))
 
     def get_detail(self):
