@@ -92,6 +92,21 @@ Open your browser, and connect to `http://127.0.0.1:8000/game/game.html` to play
 Keyboard control setting is described [here](https://github.com/elvisyjlin/lf2gym#keyboard-control).
 
 
+### Need Helps?
+
+If you encounter `selenium.common.exceptions.WebDriverException: Message: unknown error: cannot find Chrome binary`, which means Selenium cannot find the Chrome browser on your computer, please install it.
+
+```bash
+sudo apt-get install chromium-browser
+```
+
+If you encounter `selenium.common.exceptions.WebDriverException: Message: unknown error: Chrome failed to start: exited abnormally`, which means your computer probably doesn't support GUI, please run Chromedriver under `headless mode`.
+
+```bash
+env = lf2gym.make(headless=True)
+```
+
+
 ### Examples
 
 Some examples demonstrate how to use the LF2 Gym. 
