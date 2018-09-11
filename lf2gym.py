@@ -22,7 +22,7 @@ W, C, D, B = WebDriver, Character, Difficulty, Background
 def make(ip='127.0.0.1', port=8000, startServer=True, wrap='skip4', driverType=WebDriver.PhantomJS, 
     characters=[Character.Davis, Character.Dennis], difficulty=Difficulty.Dumbass, 
     background=Background.HK_Coliseum, action_options=['Basic', 'AJD', 'Full Combos'], 
-    versusPlayer=False, duel=False, rewardList=['hp'], localDriver=True, canvasSize=(550, 794), debug=False):
+    versusPlayer=False, duel=False, rewardList=['hp'], localDriver=True, headless=False, canvasSize=(550, 794), debug=False):
 
     from lib.lf2environment import LF2Environment
     from lib.lf2wrapper import LF2Wrapper, LF2SkipNWrapper
@@ -36,7 +36,7 @@ def make(ip='127.0.0.1', port=8000, startServer=True, wrap='skip4', driverType=W
     env = LF2Environment(path=lf2gymPath, ip=ip, port=port, driverType=driverType, 
         characters=characters, difficulty=difficulty, background=background, 
         versusPlayer=versusPlayer, duel=duel, rewardList=rewardList, localDriver=localDriver, 
-        canvasSize=canvasSize, debug=debug)
+        headless=headless, canvasSize=canvasSize, debug=debug)
 
     if wrap is not None:
         if wrap == '4':

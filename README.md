@@ -238,6 +238,7 @@ versusPlayer | Versus player. If `True`, the second character will be controlled
 duel | Two agents duel. If `True`, step() takes two actions for the two agents. | A Boolean. | `False`
 rewardList | Take what factors into account for rewards. | `['hp']` or `['hp', 'mp']` | `['hp']`
 localDriver | Whether to use local web driver. | A Boolean. | `True`
+headless | Enable browser headless mode (currently for Chrome only). | A Boolean. | `False`
 canvasSize | The canvas size to capture in the browser. | A tuple of 2 integers. | (550, 794)
 debug | Print out debug messages. | A Boolean. | `False`
 

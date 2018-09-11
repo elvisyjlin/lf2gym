@@ -3,4 +3,4 @@ matplotlib
 numpy
 opencv-python
 scipy
-selenium
+selenium==3.8.0

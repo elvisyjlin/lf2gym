@@ -38,7 +38,7 @@ RESET_PATIENCE = 10
 LOG_NOT_FOUND_PATIENCE = 40
 
 class LF2Environment():
-    def __init__(self, path, ip, port, driverType, characters, difficulty, background, versusPlayer, duel, rewardList, localDriver, canvasSize, debug):
+    def __init__(self, path, ip, port, driverType, characters, difficulty, background, versusPlayer, duel, rewardList, localDriver, headless, canvasSize, debug):
         print('Creating LF2 environment...')
 
         global FOLDERS
@@ -57,6 +57,7 @@ class LF2Environment():
         self.duel = duel
         self.rewardList = rewardList
         self.localDriver = localDriver
+        self.headless = headless
         self.canvasSize = canvasSize
         self.debugMode = debug
 
@@ -119,7 +120,7 @@ class LF2Environment():
             self.close()
             sleep(SLEEP_DURATION)
         print('Starting a web driver...')
-        driver = seleniumdriver.get(self.driverType, self.localDriver, self.path)
+        driver = seleniumdriver.get(self.driverType, self.localDriver, self.headless, self.path)
         print('Connecting to game server [{0}]...'.format(url))
         driver.get('{0}/game/game.html'.format(url))
         return driver

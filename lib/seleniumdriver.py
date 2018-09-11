@@ -27,7 +27,7 @@ SRC_URL_DICT = {
     'webdriver/geckodriver_0.19.1_arm7hf/geckodriver': 'https://www.dropbox.com/s/k8dibiirz35zjf0/chromedriver.exe?dl=1'
 }
 
-def get(driverType, localDriver=True, path='.'):
+def get(driverType, localDriver=True, headless=False, path='.'):
     driverType = str(driverType)
     if driverType == 'PhantomJS':
         # phantomjs_options.add_argument("--disable-web-security")
@@ -46,7 +46,8 @@ def get(driverType, localDriver=True, path='.'):
         chrome_options.add_argument("--disable-infobars")
         chrome_options.add_argument("--disable-web-security")
         # chrome_options.add_argument("--window-size=800,600")
-        # chrome_options.add_argument("--headless") # will not show the Chrome browser window
+        if headless:
+            chrome_options.add_argument("--headless") # will not show the Chrome browser window
         if localDriver:
             source = get_source(driverType, path)
             driver = webdriver.Chrome(executable_path=source, service_log_path=join(path, 'chromedriver.log'), desired_capabilities=desired, chrome_options=chrome_options)
