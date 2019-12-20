@@ -18,7 +18,7 @@ import sys
 
 from PIL import Image
 from glob import glob
-from scipy.misc import imresize
+from skimage.transform import resize
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
@@ -326,7 +326,7 @@ class LF2Environment():
             if self.canvasSize != i.shape[0:2]:
                 print('Warning: the screenshot size is (%d, %d) rather than (%d, %d).' % (i.shape[0], i.shape[1], self.canvasSize[0], self.canvasSize[1]))
             i = self.crop(i)
-            i = imresize(i, (160, 380), interp='bilinear')
+            i = resize(i, (160, 380))
         return i
         
     def get_observation(self):
