@@ -52,7 +52,10 @@ class LF2Server():
 
     def start(self):
         '''Starts the LF2 server in the background'''
-        print('Starting LF2 server on {0}...'.format(self.server_address))
+        server_host = self.server_address[0] if self.server_address[0] != '' else '127.0.0.1'
+        server_port = str(self.server_address[1])
+        server_url = 'http://' + server_host + '/' + server_port
+        print('Starting LF2 server on {0}...'.format(server_url))
         self.thread.start()
         print('LF2 server started.')
 
