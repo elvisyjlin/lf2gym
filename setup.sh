@@ -19,6 +19,8 @@ pushd F.LF
 if [ ! -d LF2_19 ]; then
     echo "F.LF/LF2_19 does not exist, cloning one from Github..."
     git clone https://github.com/Project-F/LF2_19.git
+    # Switch to an old version because the new F.LF/AI/Crusher.js has breaking change.
+    cd LF2_19 && git checkout f2050e0c1daad4d842d14ab772de390b66849125
 fi
 popd
 
